@@ -34,10 +34,6 @@ func (rm *room) client(clientID string) (*client, error) {
 	if c, ok := rm.clients[clientID]; ok {
 		return c, nil
 	}
-	if len(rm.clients) >= maxRoomCapacity {
-		log.Printf("Room %s is full, not adding client %s", rm.id, clientID)
-		return nil, errors.New("Max room capacity reached")
-	}
 
 	var timer *time.Timer
 	if rm.parent != nil {

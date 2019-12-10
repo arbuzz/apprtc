@@ -367,9 +367,9 @@ def add_client_to_room(request, room_id, client_id, is_loopback):
       room = memcache_client.gets(key)
 
     occupancy = room.get_occupancy()
-    if occupancy >= 2:
-      error = constants.RESPONSE_ROOM_FULL
-      break
+    # if occupancy >= 2:
+    #   error = constants.RESPONSE_ROOM_FULL
+    #   break
     if room.has_client(client_id):
       error = constants.RESPONSE_DUPLICATE_CLIENT
       break
@@ -563,10 +563,10 @@ class RoomPage(webapp2.RequestHandler):
         get_memcache_key_for_room(self.request.host_url, room_id))
     if room is not None:
       logging.info('Room ' + room_id + ' has state ' + str(room))
-      if room.get_occupancy() >= 2:
-        logging.info('Room ' + room_id + ' is full')
-        self.write_response('full_template.html')
-        return
+      # if room.get_occupancy() >= 2:
+      #   logging.info('Room ' + room_id + ' is full')
+      #   self.write_response('full_template.html')
+      #   return
     # Parse out room parameters from request.
     params = get_room_parameters(self.request, room_id, None, None)
     # room_id/room_link will be included in the returned parameters
